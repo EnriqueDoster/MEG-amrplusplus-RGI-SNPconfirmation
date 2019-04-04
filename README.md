@@ -18,23 +18,6 @@ ssh user@colostate.edu@login.rc.colorado.edu
 
 ssh scompile
 
-## Purge and load existing modules
-module purge
-
-module load jdk/1.8.0
-
-## Navigate to directory where you want stage your scrips
-cd /scratch/summit/$USER/
-
-## Download this repository, unzip HMM models, and change permissions in directory
-git clone https://github.com/EnriqueDoster/MEG-summit-assembly.git
-
-cd MEG-summit-assembly
-
-gunzip containers/data/HMM/*
-
-chmod 755 -R *
-
 ## Outline of pipeline installation and execution:
 
 - Java is necessary to install nextflow and run the pipeline
@@ -58,7 +41,7 @@ usually this can be done with by loading modules available to all users on a ser
 
   - Once the repository is downloaded, I recommend going into that directory and installing nextflow (with java loaded)
 
-    - $ git clone https://github.com/EnriqueDoster/MEG-summit-assembly.git
+    - $ git clone https://github.com/EnriqueDoster/MEG-amrplusplus-RGI-SNPconfirmation.git
 
     - $ cd MEG-summit-assembly/
 

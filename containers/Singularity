@@ -42,6 +42,8 @@ From: debian:jessie-slim
     conda install -c bioconda rgi idba trimmomatic \
     bwa samtools bedtools freebayes bbmap vcftools htslib
     
+    conda install -c conda-forge ncurses
+    
     #conda install numpy scipy
     conda clean --tarballs
 

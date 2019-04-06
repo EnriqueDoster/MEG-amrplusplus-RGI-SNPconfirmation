@@ -4,7 +4,7 @@ From: debian:jessie-slim
 #Includes rgi idba trimmomatic bwa samtools bedtools freebayes bbmap vcftools htslib resistomeanalyzer, rarefactionanalyzer, SNPfinder
 
 %environment
-    PATH="/usr/local/anaconda/bin:$PATH"
+    PATH="/usr/local/bin/anaconda/bin:$PATH"
 
 %post
     ## Jave install doesn't work, but can load java module from summit
@@ -32,11 +32,11 @@ From: debian:jessie-slim
     if [ ! -d /usr/local/anaconda ]; then
          wget https://repo.continuum.io/miniconda/Miniconda2-4.3.14-Linux-x86_64.sh \
             -O ~/anaconda.sh && \
-         bash ~/anaconda.sh -b -p /usr/local/anaconda && \
+         bash ~/anaconda.sh -b -p /usr/local/bin/anaconda && \
          rm ~/anaconda.sh
     fi
     # set anaconda path
-    export PATH="/usr/local/anaconda/bin:$PATH"
+    export PATH="/usr/local/bin/anaconda/bin:$PATH"
 
     # install bulk of bioinformatic tools using conda 
     conda install -c bioconda rgi idba trimmomatic \

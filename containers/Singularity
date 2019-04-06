@@ -4,7 +4,8 @@ From: debian:jessie-slim
 #Includes rgi idba trimmomatic bwa samtools bedtools freebayes bbmap vcftools htslib resistomeanalyzer, rarefactionanalyzer, SNPfinder
 
 %environment
-    PATH="/usr/local/bin/anaconda/bin:$PATH"
+    export PATH="/usr/local/bin/anaconda/bin:$PATH"
+    . /usr/local/bin/anaconda/bin/activate compute
 
 %post
     ## Jave install doesn't work, but can load java module from summit
@@ -20,13 +21,6 @@ From: debian:jessie-slim
     r-base-core r-recommended hmmer\
     && rm -rf /var/lib/apt/lists/*
 
-    # install debian packages
-    #apt-get update
-    #apt-get install -y eatmydata
-    #eatmydata apt-get install -y wget bzip2 \
-    #  ca-certificates libglib2.0-0 libxext6 libsm6 libxrender1 \
-    #  git git-annex-standalone
-    #apt-get clean
 
     # install anaconda
     if [ ! -d /usr/local/anaconda ]; then
@@ -37,12 +31,17 @@ From: debian:jessie-slim
     fi
     # set anaconda path
     export PATH="/usr/local/bin/anaconda/bin:$PATH"
-
-    # install bulk of bioinformatic tools using conda 
-    conda install -c bioconda rgi idba trimmomatic \
-    bwa samtools bedtools freebayes bbmap vcftools htslib
     
-    conda install -c conda-forge ncurses
+    # add bioconda channels
+    conda config --add channels defaults
+    conda config --add channels conda-forge
+    conda config --add channels bioconda
+    conda update conda
+    conda clean --all --yes
+    
+    # install bulk of bioinformatic tools using conda 
+    conda create -n compute python=3 rgi idba trimmomatic bwa samtools bedtools freebayes bbmap vcftools htslib ncurses    
+        
     
     #conda install numpy scipy
     conda clean --tarballs

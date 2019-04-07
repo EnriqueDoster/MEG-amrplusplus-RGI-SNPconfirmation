@@ -66,6 +66,7 @@ From: debian:jessie-slim
     cp /usr/local/kraken2/kraken2-inspect /usr/local/bin
     cd /
     
+    chmod -R 777 /usr/local/
     
 %runscript
     echo "Now inside Singularity container woah..."

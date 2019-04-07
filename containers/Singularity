@@ -4,7 +4,7 @@ From: debian:jessie-slim
 #Includes rgi idba trimmomatic bwa samtools bedtools freebayes bbmap vcftools htslib resistomeanalyzer, rarefactionanalyzer, SNPfinder
 
 %environment
-    export PATH="/usr/local/bin/anaconda/bin:$PATH"
+    echo 'export PATH=c/usr/local/bin/anaconda/bin:${PATH}' >> $SINGULARITY_ENVIRONMENT
     . /usr/local/bin/anaconda/bin/activate compute
 
 %post
@@ -50,7 +50,8 @@ From: debian:jessie-slim
     if [ ! -d /data ]; then mkdir /data; fi
     if [ ! -d /scripts ]; then mkdir /scripts; fi
 
-
+    . /usr/local/bin/anaconda/bin/activate compute
+    
     # resistomeanalyzer
     cd /usr/local
     git clone https://github.com/cdeanj/resistomeanalyzer.git
@@ -79,6 +80,6 @@ From: debian:jessie-slim
     
 %runscript
     echo "Now inside Singularity container woah..."
-    exec /bin/bash    
+    #exec /bin/bash    
    
 %test
